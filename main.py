@@ -6,10 +6,14 @@ import streamlit as st
 import datetime
 import pandas as pd
 import os
+import mlflow.pyfunc
+import mlflow
 
+mlflow.set_tracking_uri('https://dagshub.com/kaarthikkvishwa/app.mlflow')
+run_id = "26361eba472f4669afbd2cd13c626d62"
+model_uri = f"runs:/{run_id}/model"
+loaded_model = mlflow.pyfunc.load_model(model_uri=model_uri)
 
-with open("final_model.pkl", "rb") as model_file:
-    loaded_model = pickle.load(model_file)
 
 st.title("Meeting price prediction")
 
